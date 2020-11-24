@@ -7,3 +7,14 @@ export enum DatabaseReferences {
     mysql = 'mysql',
     postgresQL = 'postgresQL'
 }
+
+export interface ReponseMessages {
+    status: number;
+    message: string;
+    result: any;
+}
+
+export const getMessageFromParameter = (status: number,  message: string, result: any) => {
+    const objResponse: ReponseMessages = { status, message, result }; 
+    return objResponse;
+}

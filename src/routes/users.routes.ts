@@ -12,7 +12,8 @@ export class UserRoutes {
     }
 
     public defineRoute(): void {
-        this._routes.post('/login', this.userController.createUser.bind(this.userController));
+        this._routes.post('/createUser', this.userController.createUser.bind(this.userController));
+        this._routes.post('/login', this.userController.login.bind(this.userController));
     }
 
     get getRoute(): any {
