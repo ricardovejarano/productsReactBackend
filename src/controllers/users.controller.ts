@@ -23,5 +23,8 @@ export class UsersController {
         console.log(req, res)
     }
 
+    public deleteUser(req: any, res: any):any {
+        console.log(req, res)
+    }
 
 }
