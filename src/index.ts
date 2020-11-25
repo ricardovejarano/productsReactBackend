@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import { UserRoutes } from './routes/users.routes';
 import * as dotenv from 'dotenv';
 import { FactoryDatabase } from './db/interfaces/db.factory';
+import { CategoryRoutes } from './routes/category.routes';
+import { ProductRoutes } from './routes/product.routes';
 
 dotenv.config();
 const app = express();
@@ -18,11 +20,15 @@ app.use(bodyParser.json());
 
 // Import routes
 const userRoutes = new UserRoutes(express.Router());
+const categoryRoutes = new CategoryRoutes(express.Router());
+const productRoutes = new ProductRoutes(express.Router());
 
 
 // Routes
 app.get('/', (req, res) => res.send('Server alive'));
 app.use('/api/users', userRoutes.getRoute);
+app.use('/api/categories', categoryRoutes.getRoute);
+app.use('/api/products', productRoutes.getRoute);
 
 dbConnection.connectToDataBase()
     .then(_ => {

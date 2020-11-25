@@ -22,7 +22,7 @@ export class UsersController {
             const result = await userModel.create(user);
             res.send(result);
         } catch (error) {
-            const response: ReponseMessages = getMessageFromParameter(403, 'User not create', false);
+            const response: ReponseMessages = getMessageFromParameter(500, 'User not create', error.message);
             res.send(response);
             throw new Error(error);
         }
