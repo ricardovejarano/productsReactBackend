@@ -22,9 +22,8 @@ export class UsersController {
             const result = await userModel.create(user);
             res.send(result);
         } catch (error) {
-            res.send({
-                'error': error.message
-            });
+            const response: ReponseMessages = getMessageFromParameter(403, 'User not create', false);
+            res.send(response);
             throw new Error(error);
         }
 
@@ -54,17 +53,16 @@ export class UsersController {
                 response: result
             });
         } catch (error) {
-            res.send({
-                status: 500,
-                message: 'Internal server error'
-            });
+            const response: ReponseMessages = getMessageFromParameter(500,'Internal server error', true);
+            res.send(response);
             throw new Error(error);
         }
     }
 
-    /**
+    /**   
+     * Function create hash 
      * 
-     * @param password 
+     * @param password  
      */
     private async generateHashForPassword(password: string): Promise<string> {
         return bcrypt.hash(password, saltRounds);
