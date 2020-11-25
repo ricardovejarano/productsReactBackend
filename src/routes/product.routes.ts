@@ -14,6 +14,7 @@ export class ProductRoutes {
     public defineRoute(): void {
         this._routes.get('/getProducts', this.productController.getProducts.bind(this.productController));
         this._routes.get('/getProduct', this.productController.getProduct.bind(this.productController));
+        this._routes.get('/searchProducts', this.productController.searchProducts.bind(this.productController));
         this._routes.post('/createProduct', this.productController.createProduct.bind(this.productController));
         this._routes.post('/deleteProduct', this.productController.deleteProduct.bind(this.productController));
         this._routes.post('/editProduct', this.productController.editProduct.bind(this.productController));

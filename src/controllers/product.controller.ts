@@ -82,4 +82,16 @@ export class ProductController {
         }
     }
 
+    public async searchProducts(req: any, res: any) {
+        const { query } = req.query;
+        try {
+            const products = await productModel.find({ name: { $regex: query, $options: 'i' }});
+            const response = getMessageFromParameter(200, 'Products found', products);
+            res.send(response);
+        } catch (error) {
+            const response = getMessageFromParameter(500, 'Server error', error.message);
+            res.send(response)
+        }
+    }
+
 }
