@@ -13,6 +13,6 @@ Perform in bash:
 
 ## Running project
 
-1. `npm run dev:start`
+1. `npm run start:dev`
 
 

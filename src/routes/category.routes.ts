@@ -12,7 +12,14 @@ export class CategoryRoutes {
     }
 
     public defineRoute(): void {
+
+        this._routes.get('/getCategories', this.categoryController.getCategories.bind(this.categoryController));
+        this._routes.get('/getCategory', this.categoryController.getCategory.bind(this.categoryController));
+        this._routes.get('/searchCategory', this.categoryController.searchCategory.bind(this.categoryController));
         this._routes.post('/createCategory', this.categoryController.createCategory.bind(this.categoryController));
+        this._routes.post('/deleteCategory', this.categoryController.deleteCategory.bind(this.categoryController));
+        this._routes.post('/editCategory', this.categoryController.editCategory.bind(this.categoryController));
+        
     }
 
     get getRoute(): any {
