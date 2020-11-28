@@ -1,5 +1,14 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+export interface IProductResponse {
+    _id: string;
+    name: string;
+    price: number;
+    description: string;
+    disStock: number;
+    idCategory: string;
+}
+
 export interface IProduct extends Document {
     name: string;
     price: number;

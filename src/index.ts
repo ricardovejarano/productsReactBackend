@@ -9,7 +9,7 @@ import { ProductRoutes } from './routes/product.routes';
 
 dotenv.config();
 const app = express();
-const port = 3000;
+const port = 5000;
 const factoryDatabase = new FactoryDatabase();
 const dbReference = process.env.DB;
 const dbConnection = factoryDatabase.getDatabaseInstance(dbReference);

@@ -1,11 +1,25 @@
-import productModel from '../models/product.model';
-import categoryModel from '../models/category.model';
+import productModel, { IProduct } from '../models/product.model';
+import categoryModel, { ICategory, ICategoryResponse } from '../models/category.model';
 import { ReponseMessages, getMessageFromParameter } from '../utils/constants';
+import { query } from 'express';
 
 export class ProductController {
 
     constructor() {
         // TODO
+    }
+
+    public async getProductsByUser(req: any, res: any): Promise<any> {
+
+        const { idUser } = req.query;
+        const categories = await categoryModel.find({ idUser });
+        try {
+            const result: ICategoryResponse[] = await this.getArrayProductsAndCategories(categories);
+            const response = getMessageFromParameter(200, 'Products found', result);
+            res.send(response);
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 
     public async getProducts(req: any, res: any): Promise<any> {
@@ -94,4 +108,24 @@ export class ProductController {
         }
     }
 
+    private async getArrayProductsAndCategories(categories: any): Promise<ICategoryResponse[]> {
+        let response: ICategoryResponse[] = [];
+        const length = categories.length;
+        let counter = 0;
+        return new Promise<ICategoryResponse[]>((resolve: any, reject: any) => {
+            categories.forEach(async (category: ICategoryResponse) => {
+                try {
+                    const products = await productModel.find({ idCategory: category._id });
+                    const responseTemp: ICategoryResponse = { _id: category._id, idUser: category.idUser, name: category.name, description: category.description, products };
+                    response.push(responseTemp);
+                    counter++;
+                    if(counter === length) {
+                        resolve(response);
+                    }
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        });
+    }
 }
